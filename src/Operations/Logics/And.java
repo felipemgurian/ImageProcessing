@@ -35,7 +35,27 @@ public class And {
 	
 	public static Image and(Image a, int cor) {
         Image result = new Image(a.getW(), a.getH());
+        
+        int r   = Color.red(cor);
+        int g   = Color.green(cor);
+        int b   = Color.blue(cor);
+               
+		for(int j = 0; j < result.getH(); j++){
+	            for(int i = 0; i < result.getW(); i++){
+	            	
+	            	int cora = a.getP(i, j);
+	            	int ra   = Color.red(cora);
+	                int ga   = Color.green(cora);
+	                int ba   = Color.blue(cora);
 
+	                int resR = ra & r;
+	                int resG = ga & g;
+	                int resB = ba & b;
+	                
+	                int corR = resR << 16 | resG << 8 | resB;
+	                result.setP(i, j, corR);
+	            }
+		 }
 		return result;
 	}
 }

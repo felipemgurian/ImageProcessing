@@ -28,7 +28,7 @@ public class Translation {
 					y = j+ty;
 				}
 								
-				result.setP(x,y, a.getP(i, j)); // 
+				result.setP(x,y, a.getP(i, j));
 			}
 		}
 		

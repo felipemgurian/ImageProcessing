@@ -1,24 +1,24 @@
-**Aritm√©ticas**
+**AritmÈtica**
 - Soma (OK)
-- Subtra√ß√£o (OK)
-- Multiplica√ß√£o (OK)
-- Divis√£o (OK)
-- Blending
+- SubtraÁ„o (OK)
+- MultiplicaÁ„o (OK)
+- Divis„o (OK)
+- Blending (OK)
 	
-**Geom√©tricas**
-- Rota√ß√£o
-- Transla√ß√£o
+**GeomÈtricas**
+- RotaÁ„o
+- TranslaÁ„o (OK)
 - Escala (bilinear)
 	
-**L√≥gicas**
+**LÛgicas**
 - And (OK)
-- Or
-- Xor
-- Not
+- Or  (OK)
+- Xor (OK)
+- Not (OK)
 
 **Pontuais**
 - Tons de cinza
-  - m√©dia (OK)
+  - MÈdia (OK)
   - hdtv  (OK)
   - ntsc  (OK)
   - hdr   (OK)
@@ -26,11 +26,14 @@
 - Threshold (limiar)
 
 **Filtros**
-- M√©dia de 4
-- M√©dia de r
+- MÈdia de 4 (OK)
+- MÈdia de r
 - Mediana de 4
 - Mediana de r
-- Convolu√ß√£o 
+- Kernel (OK)
+- ConvoluÁ„o (OK)
+- GaussianBlur (OK)
+- UnsharpMask (OK)
 - Roberts
 - Sobel
-	Canny
+- Canny

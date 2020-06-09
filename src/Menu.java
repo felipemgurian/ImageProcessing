@@ -5,12 +5,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -21,91 +20,113 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.Font;
+
+//My Libs :)
 import Utils.Image;
+import Operations.Geometric.Translation;
+import Operations.Logics.Not;
 
 public class Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField txtActions;
 	private JTextField txtLayers;
 	private JFileChooser jfc;
-	private String ProjectPath = "C:\\Users\\fgurian\\Documents\\Faculdade\\Sistemas de Multimidia e Jogos Digitais\\ImageProcessing\\src";
+	
+	/**
+	 * Colors Variables
+	 */
+	
+	private Color menuBarColor      = new Color(98,98,100);
+	private Color backgroundColor   = new Color(98,98,100);
+	private Color sideBarColor      = new Color(98,98,100);
+	private Color imageContentColor = new Color(52,51,49);
+	
+	/**
+	 * Main Method
+	 */
 	
 	public static void main(String[] args) {
 		new Menu();
 	}
 	
+	/**
+	 * Main Menu
+	 */
+	
 	public Menu() {
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		
-
-		getContentPane().setBackground(Color.WHITE);;
+		getContentPane().setBackground(backgroundColor);
 		getContentPane().setForeground(Color.BLACK);
 		getContentPane().setEnabled(false);
 		getContentPane().setLayout(null);
-		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(168, 110, 1, 1);
-		getContentPane().add(desktopPane);
 		
 		/**
 		 * Central Content Panel
 		 */
 		
 		JPanel contentPanel = new JPanel();
-		contentPanel.setBounds(136, 11, (int) (screenSize.width * 0.72), (int) (screenSize.height * 0.87));
+		contentPanel.setBounds(41, 11, 1078, 668);
 		contentPanel.repaint();
+		contentPanel.setBackground(imageContentColor);
 		getContentPane().add(contentPanel);
 		
+		//Imagem estática para testes
+		Image img = null;
+		Image imgNot = null;
+		try {
+			img = new Image(new File("C:\\Users\\fgurian\\Pictures\\lena.jpg"));
+			imgNot = Not.not(img);
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		contentPanel.add(imgNot, BorderLayout.CENTER);
+        contentPanel.repaint();
+        
 		/**
-		 * SIDE BUTTOM BAR
+		 * SIDE BAR
 		 */
 		
 		JPanel sidePanel = new JPanel();
-		sidePanel.setBackground(Color.WHITE);
-		sidePanel.setBounds(0, 0, (int) (screenSize.width * 0.10),  (int) (screenSize.height * 0.87));
+		sidePanel.setBackground(sideBarColor);
+		sidePanel.setBounds(0, 11, 40,  668);
 		getContentPane().add(sidePanel);
 		sidePanel.setLayout(null);
 		
-		txtActions = new JTextField();
-		txtActions.setEditable(false);
-		txtActions.setHorizontalAlignment(SwingConstants.CENTER);
-		txtActions.setText("Actions");
-		txtActions.setBounds(20, 11, 86, 20);
-		sidePanel.add(txtActions);
-		txtActions.setColumns(10);
-		
 		JButton btnBt = new JButton("");
-		btnBt.setIcon(new ImageIcon(ProjectPath + "\\Resources\\Img\\Seta.png"));
+		btnBt.setIcon(new ImageIcon(this.getClass().getResource("Resources\\Img\\Seta.png")));
 		btnBt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnBt.setForeground(Color.WHITE);
-		btnBt.setBounds(20, 41, 38, 38);
+		btnBt.setBounds(10, 0, 20, 20);
 		sidePanel.add(btnBt);
 		
 		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(ProjectPath + "\\Resources\\Img\\Lapiz.png"));
-		button.setBounds(68, 41, 38, 38);
+		button.setIcon(new ImageIcon(this.getClass().getResource("Resources\\Img\\Lapiz.png")));
+		button.setBounds(10, 40, 20, 20);
 		sidePanel.add(button);
 		
 		JButton button_1 = new JButton("");
-		button_1.setIcon(new ImageIcon(ProjectPath + "\\Resources\\Img\\Borracha.png"));
+		button_1.setIcon(new ImageIcon(this.getClass().getResource("Resources\\Img\\Borracha.png")));
 		button_1.setForeground(Color.WHITE);
-		button_1.setBounds(20, 90, 38, 38);
+		button_1.setBounds(10, 80, 20, 20);
 		sidePanel.add(button_1);
 		
 		JButton button_2 = new JButton("");
-		button_2.setIcon(new ImageIcon(ProjectPath + "\\Resources\\Img\\Lupa.png"));
+		button_2.setIcon(new ImageIcon(this.getClass().getResource("Resources\\Img\\Lupa.png")));
 		button_2.setForeground(Color.WHITE);
-		button_2.setBounds(68, 90, 38, 38);
+		button_2.setBounds(10, 120, 20, 20);
 		sidePanel.add(button_2);
 		
 		JButton button_3 = new JButton("");
-		button_3.setIcon(new ImageIcon(ProjectPath + "\\Resources\\Img\\Balde.png"));
+		button_3.setIcon(new ImageIcon(this.getClass().getResource("Resources\\Img\\Balde.png")));
 		button_3.setForeground(Color.WHITE);
-		button_3.setBounds(20, 139, 38, 38);
+		button_3.setBounds(10, 160, 20, 20);
 		sidePanel.add(button_3);
 		
 		
@@ -128,13 +149,15 @@ public class Menu extends JFrame {
 		
 	    JPanel paneel2= new JPanel();
 	    paneel2.setSize(new Dimension(400,400));
-	    scrollPane.getViewport().add(paneel2,null);
+	    scrollPane.setViewportView(paneel2);
 		
 		/**
 		 * TOP MENU BAR
 		 */
 		
 	    JMenuBar menuBar = new JMenuBar();
+	    menuBar.setBorderPainted(false);
+	    menuBar.setBackground(menuBarColor);
 	    setJMenuBar(menuBar);
 	    
 	    JMenu mnFile = new JMenu("File");
@@ -146,7 +169,6 @@ public class Menu extends JFrame {
 	    JMenuItem mntmOpen = new JMenuItem("Open");
 	    
 	    mntmOpen.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e){
 		     jfc = new JFileChooser();
@@ -164,7 +186,6 @@ public class Menu extends JFrame {
 					}
 		        }
 			}
-	    	
 	    });
 
 	    mnFile.add(mntmOpen);
