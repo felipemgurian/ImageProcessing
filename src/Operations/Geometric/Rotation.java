@@ -6,11 +6,10 @@ public class Rotation {
 	public static Image rotation(Image a, int alpha, int cx, int cy) {		
 		return rotation(a, Math.toRadians(alpha),  cx,  cy);
 	}
-
 	
 	public static Image rotation(Image a, double radians, int cx, int cy) {
-		Image result = null;
-		result = new Image(a.getW(), a.getH());
+		Image result = new Image(a.getW(), a.getH());
+		
 		for(int j = 0; j < a.getH(); j++) {
 			for(int i = 0; i < a.getW(); i++) {
 				

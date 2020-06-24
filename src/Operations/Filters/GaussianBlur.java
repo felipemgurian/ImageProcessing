@@ -25,6 +25,4 @@ public class GaussianBlur {
 		}
 		return k;
 	}
-	
-	//1:08:29 minutos video
 }

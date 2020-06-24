@@ -1,3 +1,5 @@
+**1:08:29 minutos video**
+
 **Aritmética**
 - Soma (OK)
 - Subtração (OK)
@@ -6,9 +8,9 @@
 - Blending (OK)
 	
 **Geométricas**
-- Rotação
+- Rotação (OK)
 - Translação (OK)
-- Escala (bilinear)
+- Escala (bilinear) (OK)
 	
 **Lógicas**
 - And (OK)
@@ -27,9 +29,9 @@
 
 **Filtros**
 - Média de 4 (OK)
-- Média de r
-- Mediana de 4
-- Mediana de r
+- Média de r (OK)
+- Mediana de 4 (OK)
+- Mediana de r (OK)
 - Kernel (OK)
 - Convolução (OK)
 - GaussianBlur (OK)

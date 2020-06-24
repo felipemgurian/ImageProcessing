@@ -6,7 +6,7 @@ import Utils.Image;
 public class Convolve {
 	
 	public static Image convolve(Image a, Kernel k) {
-		Image result = new Image();
+		Image result = new Image(a.getW(), a.getH());
 		
 		for(int j = 0; j < a.getH(); j++) {
 			for(int i = 0; i < a.getW(); i++) {
