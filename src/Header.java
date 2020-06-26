@@ -3,10 +3,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -82,13 +86,48 @@ public class Header extends JMenuBar{
 	        }
 	
 	    });
-	    menuFile = new JMenu("File");
+	    menuFile        = new JMenu("File");
+	    
+	    URL filesUrl = this.getClass().getResource("Resources\\Img\\folder.png");
+		java.awt.Image fileImg = Toolkit.getDefaultToolkit().getImage(filesUrl);
+		menuFile.setIcon(new ImageIcon(fileImg));
+	    menuFile.setForeground(Color.WHITE);
+	    
 	    menuArithmetics = new JMenu("Arithmetics");
-	    menuGeometrics = new JMenu("Geometrics");
-	    menuLogics = new JMenu("Logics");
-	    menuPunctuals = new JMenu("Punctuals");
-	    menuFilters = new JMenu("Filters");
-
+	    
+	    URL arithmeticsUrl = this.getClass().getResource("Resources\\Img\\arithmetic.png");
+		java.awt.Image arithmeticsImg = Toolkit.getDefaultToolkit().getImage(arithmeticsUrl);
+	    menuArithmetics.setIcon(new ImageIcon(arithmeticsImg));
+	    menuArithmetics.setForeground(Color.WHITE);
+	    
+	    menuGeometrics  = new JMenu("Geometrics");
+	    
+	    URL geometricsUrl = this.getClass().getResource("Resources\\Img\\geometric.png");
+		java.awt.Image geometricsIcon = Toolkit.getDefaultToolkit().getImage(geometricsUrl);
+		menuGeometrics.setIcon(new ImageIcon(geometricsIcon));
+		menuGeometrics.setForeground(Color.WHITE);
+		
+	    menuLogics      = new JMenu("Logics");
+	    
+	    URL logicsUrl = this.getClass().getResource("Resources\\Img\\logic.png");
+		java.awt.Image logicsIcon = Toolkit.getDefaultToolkit().getImage(logicsUrl);
+		menuLogics.setIcon(new ImageIcon(logicsIcon));
+	    menuLogics.setForeground(Color.WHITE);
+	    
+	    menuPunctuals   = new JMenu("Punctuals");
+	    
+	    URL punctualsUrl = this.getClass().getResource("Resources\\Img\\contrast.png");
+		java.awt.Image punctualsIcon = Toolkit.getDefaultToolkit().getImage(punctualsUrl);
+		menuPunctuals.setIcon(new ImageIcon(punctualsIcon));
+	    menuPunctuals.setForeground(Color.WHITE);
+		
+	    menuFilters     = new JMenu("Filters");
+	    
+	    URL filterUrl = this.getClass().getResource("Resources\\Img\\filter.png");
+		java.awt.Image filterIcon = Toolkit.getDefaultToolkit().getImage(filterUrl);
+	    menuFilters.setIcon(new ImageIcon(filterIcon));
+	    menuFilters.setForeground(Color.WHITE);
+	    
 	    this.add(menuFile);
 	    
 	    menuItemOpen = new JMenuItem("   Open                                                  ");
@@ -176,22 +215,29 @@ public class Header extends JMenuBar{
 
 	}
 	
-	public void listenerMenuOpen(Content content, Layers layers){
+	public void listen(Content content, Layers layers, ArrayList<Image> imagesList){
 	    menuItemOpen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
-		     jfc = new JFileChooser();
+				jfc = new JFileChooser();
 		        jfc.setAcceptAllFileFilterUsed(false);
 		        jfc.setFileFilter(new FileNameExtensionFilter("Image File", "jpg", "png"));
+		       
 		        if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
+		        	
 	                Image img;
+	                
 					try {
+						
 						img = new Image(jfc.getSelectedFile());
-						content.add(img, BorderLayout.CENTER);
-						layers.addLayer(img);
-						layers.loadLayers();
+						content.removeAll();
+						layers.removeAll();
+						imagesList.add(img);
+						for(int i = 0; i < imagesList.size(); i++) {
+							content.add(imagesList.get(i));
+							imagesList.get(i).setLocation(content.getW()/2 - imagesList.get(i).getW()/2, content.getH()/2 - imagesList.get(i).getH()/2);
+						}
 						content.repaint();
-						System.out.println("Image added!");
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

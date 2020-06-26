@@ -3,37 +3,21 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
+import Utils.Image;
 
 //My Libs :)
-import Utils.Image;
-import Operations.Filters.GaussianBlur;
-import Operations.Geometric.Rotation;
-import Operations.Geometric.Scale;
-import Operations.Geometric.Translation;
+
 
 
 public class Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField txtLayers;
 	
 	/**
 	 * Colors Variables
@@ -49,6 +33,8 @@ public class Menu extends JFrame {
 	 */
 	
 	public static void main(String[] args) {
+		
+		ArrayList<Image> imagesList = new ArrayList<Image>();
 		
 		//Create Menu
 		Menu menu = new Menu();
@@ -66,9 +52,8 @@ public class Menu extends JFrame {
 		Layers layers = new Layers(size);
 		layers.init();
 	
-		
 		//Listeners
-		header.listenerMenuOpen(content, layers);
+		header.listen(content, layers, imagesList);
 		
 		//Add Header
 		menu.add(header);
@@ -89,6 +74,9 @@ public class Menu extends JFrame {
                 Dimension d = menu.getSize();
                 content.reload(d);
                 layers.reload(d);
+                for(int i = 0; i < imagesList.size(); i++) {
+                	imagesList.get(i).setLocation(content.getW()/2 - imagesList.get(i).getW()/2, content.getH()/2 - imagesList.get(i).getH()/2);
+                }
             }
         });
 		
@@ -101,7 +89,7 @@ public class Menu extends JFrame {
 	 */
 	
 	public Menu() {
-	 
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		getContentPane().setBackground(backgroundColor);
 		getContentPane().setForeground(Color.BLACK);
 		getContentPane().setEnabled(false);
@@ -119,7 +107,9 @@ public class Menu extends JFrame {
 		
 		this.pack();
 	    this.setLocationRelativeTo(null);
-	    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+	    this.setSize(1200,700);
+	    this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+	    //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 	}
 }
