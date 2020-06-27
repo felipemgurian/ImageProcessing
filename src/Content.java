@@ -1,18 +1,17 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
-
-import javax.swing.BoxLayout;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JPanel;
 
+import Operations.Geometric.Scale;
 import Utils.Image;
 
 public class Content extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	Color color;
-	Dimension size;
+	public Dimension size;
 	int width;
 	int height;
 	
@@ -22,20 +21,20 @@ public class Content extends JPanel {
 		this.size = size;
 		this.width = (int) size.getWidth() * 80 / 100;
 		this.height = (int) size.getHeight() * 88 / 100;
+		this.setLayout(null);
+		
 	}
 	
 	public void init(){
 		this.setBounds((int) size.getWidth() * 1 / 100, 11, width, height);
 		this.setBackground(color);
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	}
 	
 	public void reload(Dimension size) {
 		this.size = size;
 		this.width = (int) size.getWidth() * 80 / 100;
 		this.height = (int) size.getHeight() * 88 / 100;
-		this.setBounds((int) size.getWidth() * 1 / 100, 11, width, height);
-		this.repaint();
+		this.setBounds((int) width * 1 / 100, 11, width, height);
 	}
 	
 	public int getW() {
@@ -45,6 +44,5 @@ public class Content extends JPanel {
 	public int getH() {
 		return this.height;
 	}
-
 	
 }

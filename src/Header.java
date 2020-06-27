@@ -1,25 +1,11 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicMenuBarUI;
-
-import Utils.Image;
 
 public class Header extends JMenuBar{
 
@@ -28,7 +14,7 @@ public class Header extends JMenuBar{
 	Dimension size;
 	
 	//Components
-	private JFileChooser jfc;
+
 	private JMenu menuFile;
 	private JMenu menuArithmetics;
 	private JMenu menuGeometrics;
@@ -37,35 +23,35 @@ public class Header extends JMenuBar{
 	private JMenu menuGrey;
 	private JMenu menuFilters;
 	
-	private JMenuItem menuItemOpen;
-	private JMenuItem menuItemSum;
-	private JMenuItem menuItemSub;
-	private JMenuItem menuItemDiv;
-	private JMenuItem menuItemMul;
-	private JMenuItem menuItemBlending;
-	private JMenuItem menuItemTranslation;
-	private JMenuItem menuItemScale;
-	private JMenuItem menuItemRotation;
-	private JMenuItem menuItemAnd;
-	private JMenuItem menuItemNot;
-	private JMenuItem menuItemOr;
-	private JMenuItem menuItemXor;
-	private JMenuItem menuItemGreyHdr;
-	private JMenuItem menuItemGreyHdtv;
-	private JMenuItem menuItemGreyMedium;
-	private JMenuItem menuItemGreyNtsc;
-	private JMenuItem menuItemHistogram;
-	private JMenuItem menuItemThreshold;
-	private JMenuItem menuItemAverageFour;
-	private JMenuItem menuItemAverageR;
-	private JMenuItem menuItemCanny;
-	private JMenuItem menuItemRoberts;
-	private JMenuItem menuItemSobel;
-	private JMenuItem menuItemGaussianBlur;
-	private JMenuItem menuItemConvolve;
-	private JMenuItem menuItemUnsharpMask;
-	private JMenuItem menuItemMedianFour;
-	private JMenuItem menuItemMedianR;
+	public JMenuItem menuItemOpen;
+	public JMenuItem menuItemSum;
+	public JMenuItem menuItemSub;
+	public JMenuItem menuItemDiv;
+	public JMenuItem menuItemMul;
+	public JMenuItem menuItemBlending;
+	public JMenuItem menuItemTranslation;
+	public JMenuItem menuItemScale;
+	public JMenuItem menuItemRotation;
+	public JMenuItem menuItemAnd;
+	public JMenuItem menuItemNot;
+	public JMenuItem menuItemOr;
+	public JMenuItem menuItemXor;
+	public JMenuItem menuItemGreyHdr;
+	public JMenuItem menuItemGreyHdtv;
+	public JMenuItem menuItemGreyMedium;
+	public JMenuItem menuItemGreyNtsc;
+	public JMenuItem menuItemHistogram;
+	public JMenuItem menuItemThreshold;
+	public JMenuItem menuItemAverageFour;
+	public JMenuItem menuItemAverageR;
+	public JMenuItem menuItemCanny;
+	public JMenuItem menuItemRoberts;
+	public JMenuItem menuItemSobel;
+	public JMenuItem menuItemGaussianBlur;
+	public JMenuItem menuItemConvolve;
+	public JMenuItem menuItemUnsharpMask;
+	public JMenuItem menuItemMedianFour;
+	public JMenuItem menuItemMedianR;
 
 	public Header(Color color, Dimension size) {
 		super();
@@ -77,15 +63,7 @@ public class Header extends JMenuBar{
 		
 		this.setBorderPainted(false);
 	    this.setBackground(menuBarColor);
-	    this.setUI(new BasicMenuBarUI() {
 
-	    	@Override
-	        public void paint(Graphics g, JComponent c) {
-	            g.setColor(Color.black);
-	            g.fillRect(0, 0, c.getWidth(), c.getHeight());
-	        }
-	
-	    });
 	    menuFile        = new JMenu("File");
 	    
 	    URL filesUrl = this.getClass().getResource("Resources\\Img\\folder.png");
@@ -213,38 +191,6 @@ public class Header extends JMenuBar{
 		menuFilters.add(menuItemMedianFour);
 		menuFilters.add(menuItemMedianR);
 
-	}
-	
-	public void listen(Content content, Layers layers, ArrayList<Image> imagesList){
-	    menuItemOpen.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e){
-				jfc = new JFileChooser();
-		        jfc.setAcceptAllFileFilterUsed(false);
-		        jfc.setFileFilter(new FileNameExtensionFilter("Image File", "jpg", "png"));
-		       
-		        if(jfc.showOpenDialog(null)==JFileChooser.APPROVE_OPTION){
-		        	
-	                Image img;
-	                
-					try {
-						
-						img = new Image(jfc.getSelectedFile());
-						content.removeAll();
-						layers.removeAll();
-						imagesList.add(img);
-						for(int i = 0; i < imagesList.size(); i++) {
-							content.add(imagesList.get(i));
-							imagesList.get(i).setLocation(content.getW()/2 - imagesList.get(i).getW()/2, content.getH()/2 - imagesList.get(i).getH()/2);
-						}
-						content.repaint();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		        }
-			}
-	    });
 	}
 	
 }
