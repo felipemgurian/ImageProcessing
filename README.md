@@ -24,8 +24,8 @@
   - hdtv  (OK)
   - ntsc  (OK)
   - hdr   (OK)
-- histograma
-- Threshold (limiar)
+- histograma (OK)
+- Threshold (limiar) (OK)
 
 **Filtros**
 - Média de 4 (OK)
