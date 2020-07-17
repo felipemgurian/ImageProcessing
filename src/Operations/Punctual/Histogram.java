@@ -1,6 +1,6 @@
 package Operations.Punctual;
 
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class Histogram {
@@ -15,7 +15,7 @@ public class Histogram {
             for(int i = 0; i < a.getW(); i++) {
                 
                 // Somando 1 na posicao referente a cor do pixel lido
-                int pixel = Color.red(a.getP(i, j));
+                int pixel = Utils.red(a.getP(i, j));
                 cor[pixel]++;
                 
                 // Condicao para pegar o maior valor do vetor cor[pixel]

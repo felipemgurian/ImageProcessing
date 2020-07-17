@@ -1,6 +1,6 @@
 package Operations.Filters;
 
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class AverageR {
@@ -16,9 +16,9 @@ public class AverageR {
 				
 				for(int x = 0; x < r; x++) {
 					for(int y = 0; y < r; y++) {
-						acumR = acumR + Color.red(a.getP(i + x, j + y));
-                        acumG = acumG + Color.green(a.getP(i + x, j + y));
-                        acumB = acumB + Color.blue(a.getP(i + x, j + y));
+						acumR = acumR + Utils.red(a.getP(i + x, j + y));
+                        acumG = acumG + Utils.green(a.getP(i + x, j + y));
+                        acumB = acumB + Utils.blue(a.getP(i + x, j + y));
 					}
 				}
 				

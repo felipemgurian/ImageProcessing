@@ -1,7 +1,7 @@
 package Operations.Filters;
 
 import Utils.Image;
-import Utils.Color;
+import Utils.Utils;
 
 public class AverageFour {
 	public static Image averageFour(Image a) {
@@ -9,9 +9,9 @@ public class AverageFour {
 		
 		for(int j = 0; j < a.getH(); j++) {
 			for(int i = 0; i < a.getW(); i++) {
-				int acumR = Color.red(a.getP(i,j-1)) + Color.red(a.getP(i, j)) + Color.red(a.getP(i, j+1)) + Color.red(a.getP(i-1, j)) + Color.red(a.getP(i+1, j));
-				int acumG = Color.green(a.getP(i,j-1)) + Color.green(a.getP(i, j)) + Color.green(a.getP(i, j+1)) + Color.green(a.getP(i-1, j)) + Color.green(a.getP(i+1, j));
-				int acumB = Color.blue(a.getP(i,j-1)) + Color.blue(a.getP(i, j)) + Color.blue(a.getP(i, j+1)) + Color.blue(a.getP(i-1, j)) + Color.blue(a.getP(i+1, j));
+				int acumR = Utils.red(a.getP(i,j-1)) + Utils.red(a.getP(i, j)) + Utils.red(a.getP(i, j+1)) + Utils.red(a.getP(i-1, j)) + Utils.red(a.getP(i+1, j));
+				int acumG = Utils.green(a.getP(i,j-1)) + Utils.green(a.getP(i, j)) + Utils.green(a.getP(i, j+1)) + Utils.green(a.getP(i-1, j)) + Utils.green(a.getP(i+1, j));
+				int acumB = Utils.blue(a.getP(i,j-1)) + Utils.blue(a.getP(i, j)) + Utils.blue(a.getP(i, j+1)) + Utils.blue(a.getP(i-1, j)) + Utils.blue(a.getP(i+1, j));
 				acumR /= 5;
 				acumG /= 5;
 				acumB /= 5;

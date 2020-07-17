@@ -1,11 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.io.File;
-import java.io.IOException;
 import javax.swing.JPanel;
-
-import Operations.Geometric.Scale;
-import Utils.Image;
 
 public class Content extends JPanel {
 

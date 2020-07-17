@@ -57,6 +57,7 @@ public class Header extends JMenuBar{
 		super();
 		this.menuBarColor = color;
 		this.size = size;
+		this.setBounds(0, 0, (int) size.getWidth(), 31);
 	}
 	
 	public void init() {
@@ -190,7 +191,16 @@ public class Header extends JMenuBar{
 		menuFilters.add(menuItemUnsharpMask);
 		menuFilters.add(menuItemMedianFour);
 		menuFilters.add(menuItemMedianR);
-
+		
+		this.repaint();
+	}
+	
+	public void reload(Dimension size) {
+		this.size = size;
+		this.setBounds(0, 0, (int) size.getWidth(), 31);
+		this.setBorderPainted(false);
+		this.setBackground(menuBarColor);
+		this.repaint();
 	}
 	
 }

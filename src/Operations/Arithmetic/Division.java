@@ -1,6 +1,6 @@
 package Operations.Arithmetic;
 
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class Division {
@@ -10,9 +10,9 @@ public class Division {
         for(int j = 0; j < result.getH(); j++){
             for(int i = 0; i < result.getW(); i++){
                 int cora = a.getP(i, j);
-                int ra   = Color.red(cora);
-                int ga   = Color.green(cora);
-                int ba   = Color.blue(cora);
+                int ra   = Utils.red(cora);
+                int ga   = Utils.green(cora);
+                int ba   = Utils.blue(cora);
 
                 int corb = b.getP(i,j);
                 int rb   = corb >> 16 & 0xff;
@@ -33,16 +33,16 @@ public class Division {
     public static Image div(Image a, int cor){
         Image result = new Image(a.getW(), a.getH());
 	
-        int r   = Color.red(cor);
-        int g   = Color.green(cor);
-        int b   = Color.blue(cor);
+        int r   = Utils.red(cor);
+        int g   = Utils.green(cor);
+        int b   = Utils.blue(cor);
 
         for(int j = 0; j < result.getH(); j++){
             for(int i = 0; i < result.getW(); i++){
                 int cora = a.getP(i, j);
-                int ra   = Color.red(cora);
-                int ga   = Color.green(cora);
-                int ba   = Color.blue(cora);
+                int ra   = Utils.red(cora);
+                int ga   = Utils.green(cora);
+                int ba   = Utils.blue(cora);
 
                 int resR = r > 0 ? ra/r : ra;       
                 int resG = g > 0 ? ga/g : ga;

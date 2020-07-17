@@ -1,6 +1,6 @@
 package Operations.Geometric;
 
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class Scale {
@@ -31,9 +31,9 @@ public class Scale {
 	                int c01 = a.getP(gxi, gyi + 1);
 	                int c11 = a.getP(gxi + 1, gyi + 1);
 	                
-	                int r = ((int) blerp((float) Color.red(c00), Color.red(c10), Color.red(c01), Color.red(c11), gx - gxi, gy - gyi)) ;
-	                int g = ((int) blerp((float) Color.green(c00), Color.green(c10), Color.green(c01), Color.green(c11), gx - gxi, gy - gyi)) ;
-	                int b = ((int) blerp((float) Color.blue(c00), Color.blue(c10), Color.blue(c01), Color.blue(c11), gx - gxi, gy - gyi));
+	                int r = ((int) blerp((float) Utils.red(c00), Utils.red(c10), Utils.red(c01), Utils.red(c11), gx - gxi, gy - gyi)) ;
+	                int g = ((int) blerp((float) Utils.green(c00), Utils.green(c10), Utils.green(c01), Utils.green(c11), gx - gxi, gy - gyi)) ;
+	                int b = ((int) blerp((float) Utils.blue(c00), Utils.blue(c10), Utils.blue(c01), Utils.blue(c11), gx - gxi, gy - gyi));
 
 	                int resultRGB = r << 16 | g << 8 | b;
 	                result.setP(x, y, resultRGB);
@@ -58,9 +58,9 @@ public class Scale {
 	                int c01 = a.getP(gxi, gyi + 1);
 	                int c11 = a.getP(gxi + 1, gyi + 1);
 	                
-	                int r = ((int) blerp((float) Color.red(c00), Color.red(c10), Color.red(c01), Color.red(c11), gx - gxi, gy - gyi)) ;
-	                int g = ((int) blerp((float) Color.green(c00), Color.green(c10), Color.green(c01), Color.green(c11), gx - gxi, gy - gyi)) ;
-	                int b = ((int) blerp((float) Color.blue(c00), Color.blue(c10), Color.blue(c01), Color.blue(c11), gx - gxi, gy - gyi));
+	                int r = ((int) blerp((float) Utils.red(c00), Utils.red(c10), Utils.red(c01), Utils.red(c11), gx - gxi, gy - gyi)) ;
+	                int g = ((int) blerp((float) Utils.green(c00), Utils.green(c10), Utils.green(c01), Utils.green(c11), gx - gxi, gy - gyi)) ;
+	                int b = ((int) blerp((float) Utils.blue(c00), Utils.blue(c10), Utils.blue(c01), Utils.blue(c11), gx - gxi, gy - gyi));
 
 	                int resultRGB = r << 16 | g << 8 | b;
 	                result.setP(x, y, resultRGB);

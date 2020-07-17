@@ -1,6 +1,6 @@
 package Operations.Filters;
 
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class Convolve {
@@ -13,16 +13,19 @@ public class Convolve {
 				float accumR = 0;
 				float accumG = 0;
 				float accumB = 0;
-				
+
 				for(int l = 0; l < k.k.length; l++) {
 					for(int m = 0; m < k.k[0].length; m++) {
+						
 						int color = a.getP(i-k.cx+l, j-k.cy+m);
-						int r = Color.red(color);
-						int g = Color.green(color);
-						int b = Color.blue(color);		
+						int r = Utils.red(color);
+						int g = Utils.green(color);
+						int b = Utils.blue(color);		
+						
 						accumR += k.k[l][m]*r;
 						accumG += k.k[l][m]*g;
-						accumB += k.k[l][m]*b;				
+						accumB += k.k[l][m]*b;		
+						
 					}
 				}
 				
@@ -39,4 +42,6 @@ public class Convolve {
 		}
 		return result;
 	}
+	
+
 }

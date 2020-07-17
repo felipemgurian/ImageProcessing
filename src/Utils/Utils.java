@@ -1,6 +1,6 @@
 package Utils;
 
-public class Color {
+public class Utils {
 	
 	public static int red(int cor) {
 		return cor >> 16 & 0xff;

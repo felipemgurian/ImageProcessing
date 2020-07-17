@@ -2,7 +2,7 @@ package Operations.Filters;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class MedianR {
@@ -17,9 +17,9 @@ public class MedianR {
 				
 				for(int x = 0; x < r; x++) {
 					for(int y = 0; y < r; y++) {
-						arrayR.add((Color.red(a.getP(i + x, j + y))));
-						arrayG.add((Color.green(a.getP(i + x, j + y))));
-						arrayB.add((Color.blue(a.getP(i + x, j + y))));
+						arrayR.add((Utils.red(a.getP(i + x, j + y))));
+						arrayG.add((Utils.green(a.getP(i + x, j + y))));
+						arrayB.add((Utils.blue(a.getP(i + x, j + y))));
 					}
 				}
 				

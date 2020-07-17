@@ -1,7 +1,7 @@
 package Operations.Logics;
 
 import Utils.Image;
-import Utils.Color;
+import Utils.Utils;
 public class And {
 	public static Image and(Image a, Image b) {
         Image result = new Image(Math.max(a.getW(), b.getW()),Math.max(a.getH(), b.getH()));
@@ -10,15 +10,15 @@ public class And {
 	            for(int i = 0; i < result.getW(); i++){
 	            	//Separa os canais de cor de A
 	            	int cora = a.getP(i, j);
-	            	int ra   = Color.red(cora);
-	                int ga   = Color.green(cora);
-	                int ba   = Color.blue(cora);
+	            	int ra   = Utils.red(cora);
+	                int ga   = Utils.green(cora);
+	                int ba   = Utils.blue(cora);
 	                
 	            	//Separa os canais de cor de B
 	                int corb = b.getP(i,j);
-	                int rb   = Color.red(corb);
-	                int gb   = Color.green(corb);
-	                int bb   = Color.blue(corb);
+	                int rb   = Utils.red(corb);
+	                int gb   = Utils.green(corb);
+	                int bb   = Utils.blue(corb);
 
 	                //Pra cada canal faz Ra & Rb
 	                int resR = ra & rb;
@@ -36,17 +36,17 @@ public class And {
 	public static Image and(Image a, int cor) {
         Image result = new Image(a.getW(), a.getH());
         
-        int r   = Color.red(cor);
-        int g   = Color.green(cor);
-        int b   = Color.blue(cor);
+        int r   = Utils.red(cor);
+        int g   = Utils.green(cor);
+        int b   = Utils.blue(cor);
                
 		for(int j = 0; j < result.getH(); j++){
 	            for(int i = 0; i < result.getW(); i++){
 	            	
 	            	int cora = a.getP(i, j);
-	            	int ra   = Color.red(cora);
-	                int ga   = Color.green(cora);
-	                int ba   = Color.blue(cora);
+	            	int ra   = Utils.red(cora);
+	                int ga   = Utils.green(cora);
+	                int ba   = Utils.blue(cora);
 
 	                int resR = ra & r;
 	                int resG = ga & g;

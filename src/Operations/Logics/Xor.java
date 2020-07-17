@@ -1,6 +1,6 @@
 package Operations.Logics;
 
-import Utils.Color;
+import Utils.Utils;
 import Utils.Image;
 
 public class Xor {
@@ -9,14 +9,14 @@ public class Xor {
 		for(int j = 0; j < result.getH(); j++) {
 			for(int i = 0; i < result.getW(); i++) {
 				int cora = a.getP(i,j);
-				int ra = Color.red(cora);
-				int ga = Color.green(cora);
-				int ba = Color.blue(cora);
+				int ra = Utils.red(cora);
+				int ga = Utils.green(cora);
+				int ba = Utils.blue(cora);
 				
 				int corb = b.getP(i,j);
-				int rb = Color.red(corb);
-				int gb = Color.green(corb);
-				int bb = Color.blue(corb);
+				int rb = Utils.red(corb);
+				int gb = Utils.green(corb);
+				int bb = Utils.blue(corb);
 
 				int resR = ra ^ rb;
 				int resG = ga ^ gb;
@@ -33,16 +33,16 @@ public class Xor {
 	public static Image xor(Image a, int cor) {
 		Image result = new Image(a.getW(), a.getH());
 		
-        int r   = Color.red(cor);
-        int g   = Color.green(cor);
-        int b   = Color.blue(cor);
+        int r   = Utils.red(cor);
+        int g   = Utils.green(cor);
+        int b   = Utils.blue(cor);
         
 		for(int j = 0; j < result.getH(); j++) {
 			for(int i = 0; i < result.getW(); i++) {
 				int cora = a.getP(i,j);
-				int ra = Color.red(cora);
-				int ga = Color.green(cora);
-				int ba = Color.blue(cora);
+				int ra = Utils.red(cora);
+				int ga = Utils.green(cora);
+				int ba = Utils.blue(cora);
 
 				int resR = ra ^ r;
 				int resG = ga ^ g;

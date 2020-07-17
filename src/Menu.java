@@ -1,24 +1,23 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
-
-import Operations.Geometric.Rotation;
-import Operations.Geometric.Scale;
-import Operations.Geometric.Translation;
+import java.awt.event.MouseAdapter;
 import Utils.Image;
 
 //My Libs :)
@@ -27,7 +26,7 @@ import Operations.Filters.*;
 import Operations.Logics.*;
 import Operations.Punctual.Grey.*;
 import Operations.Punctual.*;
-
+import Operations.Geometric.*;
 
 public class Menu extends JFrame {
 
@@ -48,6 +47,8 @@ public class Menu extends JFrame {
 	static Header header;
 	static Content content;
 	static Layers layers;
+	
+	static Point layerSelected;
 	/**
 	 * Main Method
 	 */
@@ -55,6 +56,7 @@ public class Menu extends JFrame {
 	public static void main(String[] args) {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		imagesList = new ArrayList<Image>();
+		layerSelected = new Point();
 
 		//Create Menu
 		menu = new Menu();
@@ -71,7 +73,7 @@ public class Menu extends JFrame {
 		//Create Layers
 		layers = new Layers(menu.getSize());
 		layers.init();
-
+		
 		//Listeners
 
 		//Add Header
@@ -85,7 +87,10 @@ public class Menu extends JFrame {
 		menu.add(layers);
 
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
+		/*
+		 * ON RESIZE
+		 */
 		menu.addComponentListener(new java.awt.event.ComponentAdapter(){
 			@Override
 			public void componentResized(java.awt.event.ComponentEvent evt)
@@ -94,7 +99,87 @@ public class Menu extends JFrame {
 			}
 
 		});
+		
+		JPopupMenu  menuLayer = new JPopupMenu ();
+		
+        JMenuItem itemLayerUp = new JMenuItem("Up");
+        JMenuItem itemLayerDown = new JMenuItem("Down");
+        JMenuItem itemLayerDelete = new JMenuItem("Delete");
+        
+        menuLayer.add(itemLayerUp);  
+        menuLayer.add(itemLayerDown);  
+        menuLayer.add(itemLayerDelete);  
+        
+        itemLayerUp.addActionListener(new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	JPanel layer = (JPanel) layers.getComponentAt(layerSelected);
+            	if(layer.getY()/41 != 0) {
+	            	Image tmpUP = imagesList.get(layer.getY()/41 - 1);
+	            	Image tmpDOWN = imagesList.get(layer.getY()/41);
+	            	imagesList.remove(layer.getY()/41);
+	            	imagesList.remove(layer.getY()/41 - 1);
+	            	imagesList.add(layer.getY()/41 - 1, tmpDOWN);
+	            	imagesList.add(layer.getY()/41, tmpUP);
+
+	            	reloadAll();
+            	}
+            	layerSelected = null;
+            }
+            
+         });
+	    itemLayerDown.addActionListener(new ActionListener() {
+	
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	JPanel layer = (JPanel) layers.getComponentAt(layerSelected);
+	        	if(layer.getY()/41 + 1 < imagesList.size()) {
+	        		
+	            	Image tmpUP = imagesList.get(layer.getY()/41);
+	            	Image tmpDOWN = imagesList.get(layer.getY()/41 + 1);
+	            	imagesList.remove(layer.getY()/41 + 1);
+	            	imagesList.remove(layer.getY()/41);
+	            	imagesList.add(layer.getY()/41, tmpDOWN);
+	            	imagesList.add(layer.getY()/41 +1, tmpUP);
+	            	reloadAll();
+	        	}
+	        	layerSelected = null;
+	        }
+	        
+	     });
+        
+        itemLayerDelete.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	JPanel layer = (JPanel) layers.getComponentAt(layerSelected);
+            	imagesList.remove(layer.getY()/41);
+            	reloadAll();
+            	layerSelected = null;
+            }
+         });
+
+		layers.addMouseListener( new MouseAdapter() {
+				@Override
+				    public void mouseClicked(MouseEvent e) {
+					Point p = e.getPoint();
+					//JPanel source = null;
+					    if (layers.getComponentAt(p) != null && layers.getComponentAt(p) != layers) {
+					    	//source = (JPanel) layers.getComponentAt(p);
+					    	menuLayer.show(layers, p.x, p.y);
+					    	layerSelected = p;
+					    }
+				   	}
+				
+			    }
+		);
+		
+		/*
+		 *  MENU BUTTOM OPERATIONS
+		 */
+		
+		
 		header.menuItemOpen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -122,6 +207,10 @@ public class Menu extends JFrame {
 			}
 		});
 
+		/*
+		 *  MENU BUTTOM OPERATIONS ARITHMETICS
+		 */
+		
 		header.menuItemSum.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -356,7 +445,11 @@ public class Menu extends JFrame {
 				reloadAll();
 			}
 		});
-
+		
+		/*
+		 *  MENU BUTTOM OPERATIONS LOGICS
+		 */
+		
 		header.menuItemAnd.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -530,7 +623,11 @@ public class Menu extends JFrame {
 				reloadAll();
 			}
 		});
-
+		
+		/*
+		 *  MENU BUTTOM OPERATIONS GEOMETRICS
+		 */
+		
 		header.menuItemRotation.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -652,7 +749,11 @@ public class Menu extends JFrame {
 			}
 
 		});
-
+		
+		/*
+		 *  MENU BUTTOM OPERATIONS PUNCTUALS
+		 */
+		
 		header.menuItemGreyHdr.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -858,7 +959,11 @@ public class Menu extends JFrame {
 			}
 
 		});
-
+		
+		/*
+		 *  MENU BUTTOM OPERATIONS FILTERS
+		 */
+		
 		header.menuItemAverageFour.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e){
@@ -998,12 +1103,194 @@ public class Menu extends JFrame {
 			}
 
 		});
+		
+		header.menuItemConvolve.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+
+				Object[] selectionValues = imagesList.toArray();
+				Object image1 = null;
+				Object r = null;
+
+				Image imgResult = new Image();
+
+				String[] image1Array = new String[2];
+
+				for(int i = 0; i< selectionValues.length; i++) {
+					selectionValues[i] = "Image " + i;
+				}
+
+				int initialSelection = 0;
+				image1 = JOptionPane.showInputDialog(null, "Select the image 1",
+						"image1", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+				if(image1 != null) {
+					r = JOptionPane.showInputDialog(null, "R Value");
+				}
+				
+				if(r != null) {
+					image1Array = ((String) image1).split(" ");
+
+					imgResult = Convolve.convolve(imagesList.get(Integer.parseInt(image1Array[1])), new Kernel(Integer.parseInt((String) r)));
+
+					imagesList.remove(Integer.parseInt(image1Array[1]));
+
+					imagesList.add(imgResult);
+				}
+				reloadAll();
+			}
+
+		});
+
+		
+		header.menuItemGaussianBlur.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+
+				Object[] selectionValues = imagesList.toArray();
+				Object image1 = null;
+				Object r = null;
+				Object sigma = null;
+				Object amp = null;
+				Image imgResult = new Image();
+
+				String[] image1Array = new String[2];
+
+				for(int i = 0; i< selectionValues.length; i++) {
+					selectionValues[i] = "Image " + i;
+				}
+
+				int initialSelection = 0;
+				image1 = JOptionPane.showInputDialog(null, "Select the image 1",
+						"image1", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+				if(image1 != null) {
+					r = JOptionPane.showInputDialog(null, "R Value");
+				}
+				
+				if(r != null) {
+					sigma = JOptionPane.showInputDialog(null, "Sigma Value");
+				}
+				
+				if(sigma != null) {
+					amp = JOptionPane.showInputDialog(null, "Amp Value");
+				}
+				
+				if(amp != null) {
+					image1Array = ((String) image1).split(" ");
+
+					imgResult = GaussianBlur.gaussianBlur(imagesList.get(Integer.parseInt(image1Array[1])), Integer.parseInt((String) r), Float.parseFloat((String) sigma), Float.parseFloat((String) amp));
+
+					imagesList.remove(Integer.parseInt(image1Array[1]));
+
+					imagesList.add(imgResult);
+				}
+				reloadAll();
+			}
+
+		});
+		
+		header.menuItemUnsharpMask.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+
+				Object[] selectionValues = imagesList.toArray();
+				Object image1 = null;
+				Object r = null;
+				Object v = null;
+				Object sigma = null;
+				Object amp = null;
+				Image imgResult = new Image();
+
+				String[] image1Array = new String[2];
+
+				for(int i = 0; i< selectionValues.length; i++) {
+					selectionValues[i] = "Image " + i;
+				}
+
+				int initialSelection = 0;
+				image1 = JOptionPane.showInputDialog(null, "Select the image 1",
+						"image1", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+				if(image1 != null) {
+					r = JOptionPane.showInputDialog(null, "R Value");
+				}
+				if(r != null) {
+					v = JOptionPane.showInputDialog(null, "R Value");
+				}
+				if(v != null) {
+					sigma = JOptionPane.showInputDialog(null, "R Value");
+				}
+				if(sigma != null) {
+					amp = JOptionPane.showInputDialog(null, "R Value");
+				}
+				
+				if(amp != null) {
+					image1Array = ((String) image1).split(" ");
+
+					imgResult = UnsharpMask.unsharpMask(imagesList.get(Integer.parseInt(image1Array[1])), Float.parseFloat((String) v), Integer.parseInt((String) r), Float.parseFloat((String) sigma), Float.parseFloat((String) amp));
+
+					imagesList.remove(Integer.parseInt(image1Array[1]));
+
+					imagesList.add(imgResult);
+				}
+				reloadAll();
+			}
+
+		});
+		
+		header.menuItemRoberts.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				Object[] selectionValues = imagesList.toArray();
+				Object image1 = null;
+
+				Image imgResult = new Image();
+
+				String[] image1Array = new String[2];
+
+				for(int i = 0; i< selectionValues.length; i++) {
+					selectionValues[i] = "Image " + i;
+				}
+
+				int initialSelection = 0;
+				image1 = JOptionPane.showInputDialog(null, "Select the image 1",
+						"image1", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+
+				if(image1 != null) {
+					image1Array = ((String) image1).split(" ");
+
+					imgResult = Roberts.roberts(imagesList.get(Integer.parseInt(image1Array[1])));
+
+					imagesList.remove(Integer.parseInt(image1Array[1]));
+
+					imagesList.add(imgResult);
+				}
+				reloadAll();
+				
+				}
+		});
+		
+		header.menuItemCanny.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(null, "Not Implemented!");
+				}
+		});
+
+		header.menuItemSobel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				JOptionPane.showMessageDialog(null, "Not Implemented!");
+				}
+		});
 
 		menu.repaint();
 
 	}
-
-
+	
+	
 	/**
 	 * Main Menu
 	 */
@@ -1011,10 +1298,10 @@ public class Menu extends JFrame {
 	public static void reloadAll() {
 		content.removeAll();
 		layers.removeAll();
-
+		
 		content.reload(menu.getSize());
 		layers.reload(menu.getSize());
-
+		header.reload(menu.getSize());
 		for(int i = 0; i < imagesList.size(); i++) {
 			JPanel panel = new JPanel();
 			panel.setBounds(0, i*41, layers.getWidth(), 40);
@@ -1041,7 +1328,7 @@ public class Menu extends JFrame {
 		getContentPane().setForeground(Color.BLACK);
 		getContentPane().setEnabled(false);
 		getContentPane().setLayout(null);		
-
+		
 		/**
 		 * JFRAME CONFIG
 		 */
