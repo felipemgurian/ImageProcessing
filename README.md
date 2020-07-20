@@ -1,18 +1,16 @@
-**1:08:29 minutos video**
-
-**AritmÈtica**
+**Aritm√©tica**
 - Soma (OK)
-- SubtraÁ„o (OK)
-- MultiplicaÁ„o (OK)
-- Divis„o (OK)
+- Subtra√ß√£o (OK)
+- Multiplica√ß√£o (OK)
+- Divis√£o (OK)
 - Blending (OK)
 	
-**GeomÈtricas**
-- RotaÁ„o (OK)
-- TranslaÁ„o (OK)
+**Geom√©tricas**
+- Rota√ß√£o (OK)
+- Transla√ß√£o (OK)
 - Escala (bilinear) (OK)
 	
-**LÛgicas**
+**L√≥gicas**
 - And (OK)
 - Or  (OK)
 - Xor (OK)
@@ -20,7 +18,7 @@
 
 **Pontuais**
 - Tons de cinza
-  - MÈdia (OK)
+  - M√©dia (OK)
   - hdtv  (OK)
   - ntsc  (OK)
   - hdr   (OK)
@@ -28,12 +26,12 @@
 - Threshold (limiar) (OK)
 
 **Filtros**
-- MÈdia de 4 (OK)
-- MÈdia de r (OK)
+- M√©dia de 4 (OK)
+- M√©dia de r (OK)
 - Mediana de 4 (OK)
 - Mediana de r (OK)
 - Kernel (OK)
-- ConvoluÁ„o (OK)
+- Convolu√ß√£o (OK)
 - GaussianBlur (OK)
 - UnsharpMask (OK)
 - Roberts
